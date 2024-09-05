@@ -1,5 +1,4 @@
 <?php
-  // test
   // A) Lire le fichier JSOON contenant les textes
   // Étape 1 : lire le fichif "i18n/fr.json"
   // et affecter son conteunu a une varaible PHP
