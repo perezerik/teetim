@@ -1,8 +1,22 @@
 <?php
+  //Déterminer le choix de langue de L'utilisateur
+  //print_r($_GET);
+  //Langue par défaut
+  $langue = "fr";
+
+  //Langue spécifiéé dans l'url
+  //Ca veut dire quel'utilisateur a cliquer
+  //boutons de choix de langue)
+  if(isset($_GET['lan'])){
+    $langue = $_GET['lan'];
+    
+  }
+  echo $langue;
+  
   // A) Lire le fichier JSOON contenant les textes
   // Étape 1 : lire le fichif "i18n/fr.json"
   // et affecter son conteunu a une varaible PHP
-  $textesJSON = file_get_contents("i18n/fr.json");
+  $textesJSON = file_get_contents("i18n/" . $langue . ".json");
   // Test: 
   // echo $textes;
 
@@ -10,8 +24,12 @@
   // pour remettre les textes dans la page Web aux bons endroits
   $textes = json_decode($textesJSON);
 
+  //Raccourcis pour les parties communes
   $_ent = $textes->entete;
   $_pp = $textes->pp;
+
+  //Raccourcis pour les pages spécifiques
+  $_ = $textes->$page;
 
   // Test
   // print_r($textesConvertis);
@@ -42,9 +60,8 @@
   <div class="conteneur">
     <header>
       <nav class="barre-haut">
-        <a href="#">en</a>
-        <a href="#">es</a>
-        <a class="actif" href="#">fr</a>
+        <a href="?lan=en">en</a>
+        <a class="actif" href="?lan=fr">fr</a>
       </nav>
       <nav class="barre-logo">
         <label for="cc-btn-responsive" class="material-icons burger">menu</label>
