@@ -1,18 +1,34 @@
 <?php
+  //Test: le "timestamp" de maintenant
+  //echo time();
+
+  //setcookie('patati', 'patata', time() +700*24*3600);
+  //Test: la "jarre de cookies" envoyée par le "browser"
+  //print_r($_COOKIE);
+
   //Déterminer le choix de langue de L'utilisateur
   //print_r($_GET);
-  //Langue par défaut
+  //1. Langue par défaut
   $langue = "fr";
 
-  //Langue spécifiéé dans l'url
+  //2. Langue mémorisée dans un témoi HTTMP (s'il existe !!!)
+  /*if(){
+    $langue = 
+  }*/
+
+  //3. Langue spécifiéé dans l'url
   //Ca veut dire quel'utilisateur a cliquer
   //boutons de choix de langue)
   if(isset($_GET['lan'])){
     $langue = $_GET['lan'];
     
+    //Mémoriser ce choix de langue 
+    //DONC: stocker la valeur du code de langue dans un témoin HTTP (cookies)
+    setcookie('choixLangue', $langue, time()+30*24*3600);
+    //setcookie('unAutreTest','dasdsadsadsadasssssssssssssssssssss', time()+10);
+    //setcookie('patati','', time()-1);
   }
-  echo $langue;
-  
+
   // A) Lire le fichier JSOON contenant les textes
   // Étape 1 : lire le fichif "i18n/fr.json"
   // et affecter son conteunu a une varaible PHP
