@@ -1,40 +1,44 @@
 <?php
-  //Test: le "timestamp" de maintenant
-  //echo time();
+  //Énumérer ke contenu d'un dossier
+  //$contenu = scandir('i18n');
+  //print_r($contenu);
 
-  //setcookie('patati', 'patata', time() +700*24*3600);
-  //Test: la "jarre de cookies" envoyée par le "browser"
-  //print_r($_COOKIE);
+  //Créeer un tableau des codes de langues disponibles
+  $langueDispo = [];
+  //Remplir le tableau avec les codes obtenus des noms des fichiers JSON
+  //présents dans ke dossier i18n
+  $contenuI18n = scandir('i18n');
+  
+  for($i=0; $i<count($contenuI18n); $i++){
+    $fichier = $contenuI18n[$i];
+    //Si le fichier n'est pas '.' et n'est pas '..'
+    if($fichier != '.' && $fichier != '..'){
+      $langueDispo[]= substr($fichier , 0, 2). "<br>";
+    }
+  }
 
-  //Déterminer le choix de langue de L'utilisateur
-  //print_r($_GET);
   //1. Langue par défaut
   $langue = "fr";
 
   //2. Langue mémorisée dans un témoi HTTMP (s'il existe !!!)
-  /*if(){
-    $langue = 
-  }*/
+  if(isset($_COOKIE['choixLangue'])){
+    $langue = $_COOKIE['choixLangue'];
+  }
 
-  //3. Langue spécifiéé dans l'url
-  //Ca veut dire quel'utilisateur a cliquer
-  //boutons de choix de langue)
+  //3. Langue spécifiéé dans l'url (ca veut dire que l'utilisateur a cliquer un
+  //des boutons de choix de langue)
   if(isset($_GET['lan'])){
     $langue = $_GET['lan'];
     
     //Mémoriser ce choix de langue 
     //DONC: stocker la valeur du code de langue dans un témoin HTTP (cookies)
     setcookie('choixLangue', $langue, time()+30*24*3600);
-    //setcookie('unAutreTest','dasdsadsadsadasssssssssssssssssssss', time()+10);
-    //setcookie('patati','', time()-1);
   }
 
   // A) Lire le fichier JSOON contenant les textes
   // Étape 1 : lire le fichif "i18n/fr.json"
   // et affecter son conteunu a une varaible PHP
   $textesJSON = file_get_contents("i18n/" . $langue . ".json");
-  // Test: 
-  // echo $textes;
 
   // Étape 2 : convertir le contenu du fichier en variables PHP
   // pour remettre les textes dans la page Web aux bons endroits
@@ -46,13 +50,6 @@
 
   //Raccourcis pour les pages spécifiques
   $_ = $textes->$page;
-
-  // Test
-  // print_r($textesConvertis);
-  // Imprimer la propriété altLogo de l'objet correspondant à la propriété
-  // entete de cet objet: 
-  // echo $textesConvertis->entete->altLogo;
-  // echo $textesConvertis->entete->placeholderRecherhe;
 ?>
 
 
@@ -76,8 +73,16 @@
   <div class="conteneur">
     <header>
       <nav class="barre-haut">
-        <a href="?lan=en">en</a>
-        <a class="actif" href="?lan=fr">fr</a>
+        <!-- Générer un 'bouton (lien HTML) pour chaque code de langue dans 
+         le tableau linguistique  -->
+         <!-- Début boucle -->
+        <a 
+          class="<?php  if($langue=='fr'){echo 'actif';} ?>" 
+          href="?lan=fr">
+          fr
+        </a>
+
+        <!-- Fin boucle -->
       </nav>
       <nav class="barre-logo">
         <label for="cc-btn-responsive" class="material-icons burger">menu</label>
