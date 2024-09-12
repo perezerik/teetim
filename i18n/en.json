@@ -2,11 +2,11 @@
   "entete": {
     "altLogo": "Home",
     "placeholderRecherhe": "Search",
-    "menuTeeshirts" : "T-shirts",
-    "menuCasquettes" : "Caps",
-    "menuHoodies" : "Hoodies",
-    "menuAide" : "Help",
-    "menuNous" : "About Us"
+    "menuTeeshirts": "Teeshirts",
+    "menuCasquettes": "Caps",
+    "menuHoodies": "Hoodies",
+    "menuAide": "Help",
+    "menuNous": "About Us"
   },
   "pp": {
     "achatsTitre": "Your Purchases",
@@ -19,19 +19,23 @@
     "aProposEquipe": "The Team",
     "aProposEmplois": "Jobs",
     "joindreTitre": "Contact Us",
-    "joindreTelEtiquette": "Toll-Free: ",
+    "joindreTelEtiquette": "Toll-free: ",
     "joindreCourrielEtiquette": "Email: ",
     "droits": "All rights reserved, teeTIM"
   },
   "accueil": {
-    "amorceTitre": "T-shirts, hoodies, and caps made in Quebec 💯",
+    "metaTitre": "teeTIM // natural fiber ... artificial design",
+    "metaDesc": "",
+    "amorceTitre": "Teeshirts, hoodies, and caps made in Quebec 💯",
     "amorceSousTitre": "Designed at TIM with ❤️",
     "amorceSousTitre2": "with a little help from DALL-E 😉",
-    "para1": "Today, the t-shirt is a staple in everyone's wardrobe. And in an era where environmental concerns are more pressing than ever, we prefer t-shirts made in Quebec to reduce environmental impact and highlight local craftsmanship.",
-    "para2": "V-neck, round neck, loose or fitted, short-sleeved or long-sleeved for the chilly ones, plain or patterned to style an outfit... The t-shirt is available in a variety of colors, styles, and patterns."
+    "para1": "Today, the teeshirt is a staple in everyone's wardrobe. And in an era where environmental issues are more pressing than ever, we prefer teeshirts made in Quebec to reduce environmental impact and highlight local craftsmanship.",
+    "para2": "V-neck teeshirt, round neck, loose or fitted, short sleeves or long sleeves for the chilly ones, plain or patterned to style an outfit... The teeshirt is available in a variety of colors, styles, and patterns."
   },
   "teeshirts": {
-    "titrePage": "Our T-shirts",
+    "metaTitre": "teeTIM // comfortable teeshirts, made in Quebec, of superior quality...",
+    "metaDesc": "[To be completed by the communications specialist...]",
+    "titrePage": "Our Teeshirts",
     "aVenir": "Coming soon..."
   }
 }

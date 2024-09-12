@@ -1,19 +1,32 @@
 <?php
   //Énumérer ke contenu d'un dossier
   //$contenu = scandir('i18n');
-  //print_r($contenu);
+  //print_r($contenu)
 
   //Créeer un tableau des codes de langues disponibles
   $langueDispo = [];
   //Remplir le tableau avec les codes obtenus des noms des fichiers JSON
   //présents dans ke dossier i18n
   $contenuI18n = scandir('i18n');
-  
-  for($i=0; $i<count($contenuI18n); $i++){
-    $fichier = $contenuI18n[$i];
-    //Si le fichier n'est pas '.' et n'est pas '..'
-    if($fichier != '.' && $fichier != '..'){
-      $langueDispo[]= substr($fichier , 0, 2). "<br>";
+  // Solution 1: avec une boucle standard (avec compteur)
+  //donc du code dit "impératif" (moins souhaitable)
+  // for($i=0; $i<count($contenuI18n); $i++){
+  //   $fichier = $contenuI18n[$i];
+  //   //Si le fichier n'est pas '.' et n'est pas '..'
+  //   if($fichier != '.' && $fichier != '..'){
+  //     $langueDispo[]= substr($fichier , 0, 2). "<br>";
+  //   }
+  // }
+
+  //Solution 2: avec une boucle "itérable" (sans compteur)
+  //Donc du code dit "expressif" ou "déclaratif" (plus souhaitable)
+  //(En JS cette boucle est similaire a for...of)
+  foreach($contenuI18n as $nomFichier) {
+    //Pas une bonne stratégie : il faut filtrer 
+    //Tout ce qui ne ressemble pas à 'll.json' (où 'll' sont deux lettres )
+    // Une solution possible serait d'utiliser les expressions régulières (RegExp)
+    if($nomFichier != '.' && $nomFichier != '..'){
+      $langueDispo[] = substr($nomFichier, 0, 2);
     }
   }
 
@@ -21,13 +34,18 @@
   $langue = "fr";
 
   //2. Langue mémorisée dans un témoi HTTMP (s'il existe !!!)
-  if(isset($_COOKIE['choixLangue'])){
+  //ATTENTION : code susceptible d'injection !!!
+  //Programmez défensivement !!!
+  //Ne faites pas cofnaince à ce qui vient de l'utilisateur
+  if(isset($_COOKIE['choixLangue']) && in_array($_COOKIE['choixLangue'], $langueDispo)){
     $langue = $_COOKIE['choixLangue'];
   }
 
   //3. Langue spécifiéé dans l'url (ca veut dire que l'utilisateur a cliquer un
   //des boutons de choix de langue)
-  if(isset($_GET['lan'])){
+  //ATTENTION: programmez défensivement !!!
+  //NE JAMAIS faire confiance aux valeurs qui viennet du UI (utilisateur)
+  if(isset($_GET['lan']) && in_array($_GET['lan'], $langueDispo)){
     $langue = $_GET['lan'];
     
     //Mémoriser ce choix de langue 
@@ -54,7 +72,7 @@
 
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $langue ?>" dir="ltr">
 
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,8 +81,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>teeTIM // fibre naturelle ... conception artificielle</title>
-  <meta name="description" content="Page d'accueil du concepteur de vêtements 100% fait au Québec, conçus par les étudiants du TIM à l'aide de designs produits par intelligence artificielle, et fabriqués avec des fibres 100% naturelles et biologiques.">
+  <title><?= $_->metaTitre ?></title>
+  <meta name="description" content="<?= $_->metaDesc ?>">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
@@ -76,12 +94,15 @@
         <!-- Générer un 'bouton (lien HTML) pour chaque code de langue dans 
          le tableau linguistique  -->
          <!-- Début boucle -->
-        <a 
-          class="<?php  if($langue=='fr'){echo 'actif';} ?>" 
-          href="?lan=fr">
-          fr
-        </a>
-
+        <?php  foreach($langueDispo as $codeLangue) : ?>
+          <a 
+            class="<?php  if($langue==$codeLangue){echo 'actif';} ?>" 
+            href="?lan=<?= $codeLangue ?>"
+            title = "العربية"
+            >
+            <?= $codeLangue ?>
+          </a>
+        <?php  endforeach ?>
         <!-- Fin boucle -->
       </nav>
       <nav class="barre-logo">
