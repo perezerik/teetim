@@ -96,7 +96,7 @@
          <!-- Début boucle -->
         <?php  foreach($langueDispo as $codeLangue) : ?>
           <a 
-            class="<?php  if($langue==$codeLangue){echo 'actif';} ?>" 
+            class="<?= $langue==$codeLangue ? 'actif' : '' ?>" 
             href="?lan=<?= $codeLangue ?>"
             title = "العربية"
             >
@@ -114,7 +114,7 @@
       <input type="checkbox" id="cc-btn-responsive">
       <nav class="principale">
         <label for="cc-btn-responsive" class="menu-controle material-icons">close</label>
-        <a href="teeshirts.php" class="<?php  if($page=='teeshirts') { echo 'actif';} ?>"> <?= $_ent->menuTeeshirts; ?></a>
+        <a href="teeshirts.php" class="<?= $page=='teeshirts' ? 'actif' : '' ; ?>"> <?= $_ent->menuTeeshirts; ?></a>
         <a href="casquettes.php"><?= $_ent->menuCasquettes; ?></a>
         <a href="hoodies.php" class=""> <?= $_ent->menuHoodies; ?></a>
         <span class="separateur"></span>
